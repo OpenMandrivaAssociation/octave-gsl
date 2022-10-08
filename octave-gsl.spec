@@ -4,12 +4,13 @@ Summary:	Octave bindings for the GNU Scientific Library
 Name:		octave-%{octpkg}
 Version:	2.1.1
 Release:	1
-Source0:	http://downloads.sourceforge.net/octave/%{octpkg}-%{version}.tar.gz
+Source0:	https://downloads.sourceforge.net/octave/%{octpkg}-%{version}.tar.gz
 License:	GPLv2+
 Group:		Sciences/Mathematics
 Url:		https://octave.sourceforge.io/%{octpkg}/
 
 BuildRequires:	octave-devel >= 2.9.7
+BuildRequires:	gomp-devel
 BuildRequires:	pkgconfig(gsl)
 
 Requires:	octave(api) = %{octave_api}
