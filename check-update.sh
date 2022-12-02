@@ -1,3 +1,4 @@
 #!/bin/sh
-curl https://octave.sourceforge.io/gsl/index.html 2>/dev/null | grep -A1 "<dt>Version</dt>" |sed -ne 's,</dd>.*,,;s,.*<dd>,,p'
+package=gsl
+curl -L https://gnu-octave.github.io/packages/${package}/ 2>/dev/null |sed -ne "s,.*${package}-,,;s,\.tar.\gz,,p" |head -n1
 
