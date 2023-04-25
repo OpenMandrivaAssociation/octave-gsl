@@ -1,0 +1,40 @@
+--- b/src/configure.ac
++++ a/src/configure.ac
+@@ -86,7 +86,7 @@ AC_COMPILE_IFELSE(
+   [AC_LANG_SOURCE(
+      [[
+ #include "ov-scalar.h"
+-main()
++int main()
+ {
+   octave_scalar x (1.234);
+   bool y = x.isreal ();
+@@ -106,7 +106,7 @@ AC_COMPILE_IFELSE(
+ #include "ov-scalar.h"
+ #include "ovl.h"
+ #include "parse.h"
+-main()
++int main()
+ {
+   octave_value_list ovl = octave::feval ("sin", octave_value (1.234));
+   return 0;
+--- a/src/gsl_sf.cc
++++ b/src/gsl_sf.cc
+@@ -26,7 +26,7 @@
+ #include <gsl/gsl_errno.h>
+ #include <gsl/gsl_version.h>
+ 
+-#ifdef OCTAVE_HAS_OV_ISREAL_METHOD
++#if defined(OCTAVE_HAS_OV_ISREAL_METHOD) || defined(__clang__)
+ #define ISREAL(x) ((x).isreal ())
+ #else
+ #define ISREAL(x) ((x).is_real_type ())
+@@ -47,7 +47,7 @@ special functions of the GNU Scientific
+ \n\
+ @end deftypefn\n")
+ {
+-#ifdef OCTAVE_HAS_FEVAL_IN_OCTAVE_NAMESPACE
++#if defined(OCTAVE_HAS_FEVAL_IN_OCTAVE_NAMESPACE) || defined(__clang__)
+   octave::feval ("help", octave_value ("gsl_sf"));
+ #else
+   feval ("help", octave_value ("gsl_sf"));

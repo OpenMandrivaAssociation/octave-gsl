@@ -1,15 +1,17 @@
 %global octpkg gsl
 
-Summary:	Octave bindings for the GNU Scientific Library
-Name:		octave-%{octpkg}
+Summary:	Octave bindings to the GNU Scientific Library
+Name:		octave-gsl
 Version:	2.1.1
-Release:	1
-Source0:	https://downloads.sourceforge.net/octave/%{octpkg}-%{version}.tar.gz
+Release:	2
 License:	GPLv2+
 Group:		Sciences/Mathematics
-Url:		https://packages.octave.org/%{octpkg}/
+Url:		https://packages.octave.org/gsl/
+Source0:	https://downloads.sourceforge.net/octave/gsl-%{version}.tar.gz
+# (upstream) https://savannah.gnu.org/bugs/index.php?59159
+Patch0:		octave-gsl-2.1.1-clang.patch
 
-BuildRequires:	octave-devel >= 2.9.7
+BuildRequires:  octave-devel >= 2.9.7
 BuildRequires:	gomp-devel
 BuildRequires:	pkgconfig(gsl)
 
@@ -24,23 +26,17 @@ Octave bindings to the GNU Scientific Library.
 %files
 %license COPYING
 %doc NEWS
-%dir %{octpkglibdir}
-%{octpkglibdir}/*
 %dir %{octpkgdir}
 %{octpkgdir}/*
+%dir %{octpkglibdir}
+%{octpkglibdir}/*
 
 #---------------------------------------------------------------------------
 
 %prep
 %autosetup -p1 -n %{octpkg}-%{version}
 
-# remove backup files
-#find . -name \*~ -delete
-
 %build
-export CC=gcc
-export CXX=g++
-export LDFLAGS="%ldflags -lgsl -lgslcblas"
 %set_build_flags
 %octave_pkg_build
 
