@@ -3,7 +3,7 @@
 Summary:	Octave bindings to the GNU Scientific Library
 Name:		octave-gsl
 Version:	2.1.1
-Release:	2
+Release:	3
 License:	GPLv2+
 Group:		Sciences/Mathematics
 Url:		https://packages.octave.org/gsl/
